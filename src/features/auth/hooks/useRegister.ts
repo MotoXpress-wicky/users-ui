@@ -14,7 +14,7 @@ export const useRegister = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await authApi.register(payload);
+      await authApi.register(payload);
       navigate('/login', { replace: true });
     } catch (err) {
       setError(getErrorMessage(err));

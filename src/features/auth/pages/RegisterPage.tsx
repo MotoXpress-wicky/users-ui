@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Divider } from '@/shared/components/Divider';
-import { RegisterForm } from '../components/useRegister';
+import { RegisterForm } from '../components/RegisterForm';
 import { SocialLoginGroup } from '../components/SocialLoginGroup';
 
 export const RegisterPage = () => (
