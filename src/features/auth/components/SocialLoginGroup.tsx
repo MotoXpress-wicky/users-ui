@@ -1,7 +1,7 @@
 import { Button } from '@/shared/components/Button';
 
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+// Empty means same origin. Nginx has a rule for /oauth2/ and sends it to user-service.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
 export const SocialLoginGroup = () => {
   const handleGoogleLogin = () => {

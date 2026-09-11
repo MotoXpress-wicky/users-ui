@@ -2,7 +2,7 @@ import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { axiosClient } from '@/shared/api/axiosClient';
 import { authApi } from '@/features/auth/api/authApi';
 import { useAuthStore } from '@/features/auth/stores/authStore';
-import type { AuthErrorBody } from '@/features/auth/types/auth.types';
+import type { ApiErrorBody } from '@/features/auth/types/auth.types';
 
 type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
 
@@ -10,10 +10,10 @@ type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
 // login/register -> wrong credentials, the form shows the error.
 // refresh/logout  -> refreshing these would recurse.
 const NO_REFRESH_ENDPOINTS = [
-  '/api/auth/login',
-  '/api/auth/register',
-  '/api/auth/refresh',
-  '/api/auth/logout',
+  '/api/v1/user/auth/login',
+  '/api/v1/user/auth/register',
+  '/api/v1/user/auth/refresh',
+  '/api/v1/user/auth/logout',
 ] as const;
 
 // Shared across callers so N parallel 401s cause exactly ONE refresh.
@@ -37,7 +37,7 @@ const refreshSession = (): Promise<void> => {
 export const setupInterceptors = () => {
   axiosClient.interceptors.response.use(
     (response) => response,
-    async (error: AxiosError<AuthErrorBody>) => {
+    async (error: AxiosError<ApiErrorBody>) => {
       const config = error.config as RetriableConfig | undefined;
       const url = config?.url ?? '';
 
@@ -46,7 +46,7 @@ export const setupInterceptors = () => {
       }
 
       if (NO_REFRESH_ENDPOINTS.some((path) => url.includes(path))) {
-        if (url.includes('/api/auth/refresh')) {
+        if (url.includes('/api/v1/user/auth/refresh')) {
           useAuthStore.getState().clearSession();
         }
         return Promise.reject(error);

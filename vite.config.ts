@@ -9,6 +9,6 @@ export default defineConfig({
     tsconfigPaths:true,
   },
   server:{
-    port:8081,
+    port:3000,   // users-ui is 3000. 8081 belongs to product-service.
   }
 })
