@@ -13,10 +13,13 @@ import { CheckoutPage } from "@/features/checkout/pages/CheckoutPage";
 import { OrdersPage } from "@/features/orders/pages/OrdersPage";
 import { OrderDetailPage } from "@/features/orders/pages/OrderDetailPage";
 import { RootLayout } from "./RootLayout";
+import { NotFoundPage } from "./NotFoundPage";
+import { RouteError } from "./RouteError";
 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
+    errorElement: <RouteError />,
     children: [
       // Public pages: anyone can look for parts (BR1). A login is needed only to order.
       { path: "/", element: <HomePage /> },
@@ -39,7 +42,7 @@ export const router = createBrowserRouter([
         ],
       },
 
-      { path: "*", element: <p>Page not found</p> },
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 ]);
