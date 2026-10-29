@@ -1,14 +1,14 @@
 // app/RootLayout.tsx  — this is your App.tsx, renamed
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-// import Navbar from '../helpers/ui/NavBar';
+import { NavBar } from './NavBar';
 
 export const RootLayout = () => (
-  <div className="h-screen flex flex-col bg-app font-sans text-primary">
-    {/* <Navbar /> */}
+  <div className="app-shell">
+    <NavBar />
 
-    <main className="flex-1 min-h-0 overflow-hidden">
-      <Outlet />          {/* ← your <Routes> block was here */}
+    <main className="app-main">
+      <Outlet />
     </main>
 
     <ToastContainer

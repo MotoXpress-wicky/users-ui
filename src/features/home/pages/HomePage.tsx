@@ -1,23 +1,37 @@
+import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
-import { useAuthStore } from '@/features/auth/stores/authStore';
+import { BikePicker } from '@/features/catalog/components/BikePicker';
 
+// Public home page (BR1): anyone can look for parts. A login is needed only to order.
 export const HomePage = () => {
-  const user = useAuthStore((state) => state.user);
-  const logout = useAuthStore((state) => state.logout);
+  const [text, setText] = useState('');
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login', { replace: true });
+  const onSearch = (e: FormEvent) => {
+    e.preventDefault();
+    const q = text.trim();
+    navigate(q ? `/parts?q=${encodeURIComponent(q)}` : '/parts');
   };
 
   return (
-    <main>
-      <h1>Hello, {user?.name ?? 'there'} 👋</h1>
-      <Button variant="secondary" onClick={handleLogout}>
-        Log out
-      </Button>
-    </main>
+    <div className="shop-page">
+      <h1>Motorbike parts, delivered to your door</h1>
+      <p className="shop-muted">Pay in cash when your parcel arrives.</p>
+
+      <form className="shop-filters" onSubmit={onSearch}>
+        <input
+          className="shop-input"
+          type="search"
+          placeholder="Search by part number or name"
+          aria-label="Search parts"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <Button type="submit">Search</Button>
+      </form>
+
+      <BikePicker />
+    </div>
   );
 };

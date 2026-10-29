@@ -1,0 +1,351 @@
+/* Styles for the shop pages (catalog, cart, checkout, orders) and the navigation bar.
+   They use the colour variables from index.css, so light and dark mode both work. */
+
+#root {
+  text-align: left;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+.app-main {
+  flex: 1;
+}
+
+.app-loading {
+  padding: 48px;
+  text-align: center;
+}
+
+/* ---------- navigation ---------- */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navbar-links a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- page and basic pieces ---------- */
+
+.shop-page {
+  padding: 8px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shop-page h1 {
+  font-size: 32px;
+  margin: 16px 0 4px;
+}
+
+.shop-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--bg);
+}
+
+.shop-muted {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.shop-error {
+  color: #d92d20;
+  font-size: 14px;
+}
+
+.shop-label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.shop-input {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  min-width: 0;
+}
+
+.shop-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shop-filters .shop-input[type='search'] {
+  flex: 1 1 240px;
+}
+
+.shop-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 12px 0;
+}
+
+.shop-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.shop-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--text-h);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.shop-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+
+.badge-ok,
+.status-DELIVERED {
+  color: #067647;
+  border-color: #067647;
+}
+
+.badge-no,
+.status-CANCELLED,
+.status-RETURNED {
+  color: #b42318;
+  border-color: #b42318;
+}
+
+.status-IN_TRANSIT {
+  color: #175cd3;
+  border-color: #175cd3;
+}
+
+/* ---------- parts ---------- */
+
+.part-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.part-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.part-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.part-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+
+.part-photo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.part-name {
+  font-size: 16px;
+  margin: 8px 0 0;
+  color: var(--text-h);
+}
+
+.part-price {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.part-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 800px) {
+  .part-detail,
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.part-photo-large {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  border-radius: 10px;
+  background: var(--code-bg);
+}
+
+.part-thumbs {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+
+.part-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--code-bg);
+}
+
+.part-title {
+  margin-top: 0;
+}
+
+.part-price-large {
+  font-size: 24px;
+}
+
+.part-description {
+  margin: 12px 0;
+  white-space: pre-line;
+}
+
+.qty-input {
+  width: 80px;
+}
+
+/* ---------- cart, checkout, orders ---------- */
+
+.cart-lines,
+.order-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-line,
+.order-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.cart-line-info {
+  flex: 1 1 200px;
+}
+
+.cart-line-total,
+.order-total {
+  font-weight: 600;
+  margin-left: auto;
+}
+
+.cart-summary {
+  align-self: flex-end;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.summary-lines {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+}
+
+.summary-lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
