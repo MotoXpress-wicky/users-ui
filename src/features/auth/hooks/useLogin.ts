@@ -23,7 +23,7 @@ export const useLogin = ()=>{
         const from = (location.state as {from?:string}| null)?.from ?? '/';
         navigate(from,{replace:true});
 
-        }catch(error:any){
+        }catch(error:unknown){
           setError(getErrorMessage(error))
         }finally{
             setIsLoading(false);

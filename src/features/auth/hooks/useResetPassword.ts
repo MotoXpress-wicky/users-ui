@@ -17,6 +17,8 @@ export const useResetPassword = ()=>{
 
     useEffect(()=>{
         if(!token){
+            // No token in the address: the link is wrong. Nothing to wait for.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setTokenState('invalid');
             return;
         }
@@ -43,7 +45,7 @@ export const useResetPassword = ()=>{
         try{
             await authApi.resetPassword({token,newPassword});
             navigate('/login?status=password_reset',{replace:true});
-        }catch(error:any){
+        }catch(error:unknown){
             setError(getErrorMessage(error));
             setTokenState('invalid');
         }finally{

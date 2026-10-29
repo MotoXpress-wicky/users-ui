@@ -29,6 +29,8 @@ export const useForgotPassword = () => {
     const remaining = Math.ceil((storedUntil - Date.now()) / 1000);
 
     if (remaining > 0) {
+      // Reading sessionStorage is an outside system, so this has to happen after the first render.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSecondsLeft(remaining);
     } else {
       sessionStorage.removeItem(COOLDOWN_KEY);
