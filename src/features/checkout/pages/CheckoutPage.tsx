@@ -19,6 +19,7 @@ export const CheckoutPage = () => {
   const clearCart = useCartStore((s) => s.clear);
   const navigate = useNavigate();
 
+  const [placed, setPlaced] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [problems, setProblems] = useState<string[]>([]);
 
@@ -28,8 +29,9 @@ export const CheckoutPage = () => {
     formState: { errors, isSubmitting },
   } = useForm<CheckoutFormValues>({ resolver: zodResolver(checkoutSchema) });
 
-  // The order was placed and the cart was cleared. Do not send a customer with an empty cart away from the result.
-  if (lines.length === 0 && !isSubmitting) {
+  // An empty cart has nothing to check out. But once the order is placed the cart is empty on purpose,
+  // and the customer must go to the order page, not back to the cart.
+  if (lines.length === 0 && !placed) {
     return <Navigate to="/cart" replace />;
   }
 
@@ -42,6 +44,7 @@ export const CheckoutPage = () => {
         lines: lines.map((l) => ({ productId: l.productId, quantity: l.quantity })),
         address,
       });
+      setPlaced(true);
       navigate(`/orders/${order.orderNo}`, { replace: true });
       clearCart();
       toast.success(`Order ${order.orderNo} placed. Pay ${formatMoney(order.total, order.currency)} in cash on delivery.`);

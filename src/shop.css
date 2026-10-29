@@ -349,3 +349,35 @@
   padding: 4px 0;
   border-bottom: 1px solid var(--border);
 }
+
+/* ---------- forms (InputField from shared/components) ---------- */
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 12px 0;
+}
+
+.input-field label {
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.input-field input {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.input-field input[aria-invalid='true'] {
+  border-color: #d92d20;
+}
+
+.input-error {
+  color: #d92d20;
+  font-size: 13px;
+}
