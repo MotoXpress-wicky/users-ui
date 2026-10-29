@@ -67,6 +67,7 @@
 
 .shop-page h1 {
   font-size: 32px;
+  line-height: 1.2;
   margin: 16px 0 4px;
 }
 
@@ -202,6 +203,18 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* On a phone: two parts per row instead of one, so more fit on the screen. */
+@media (max-width: 520px) {
+  .part-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .part-card {
+    padding: 10px;
+  }
 }
 
 .part-link {
@@ -380,4 +393,42 @@
 .input-error {
   color: #d92d20;
   font-size: 13px;
+}
+
+/* ---------- buttons (the shared Button sets data-variant="primary" or "secondary") ---------- */
+
+button[data-variant] {
+  font: inherit;
+  min-height: 44px; /* a comfortable size for a finger */
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+}
+
+button[data-variant='primary'] {
+  background: var(--accent);
+  color: #fff;
+}
+
+button[data-variant='secondary'] {
+  background: transparent;
+  color: var(--accent);
+}
+
+button[data-variant]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Checkout: the form and the order summary sit under each other on small screens.
+   This rule is here, after .checkout-grid, so it wins over the two-column setting. */
+@media (max-width: 800px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+form button[type='submit'] {
+  margin-top: 8px;
 }
