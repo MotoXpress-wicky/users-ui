@@ -6,8 +6,11 @@ RUN npm ci
 COPY . .
 # An empty address means "the same site that served this page". The big Nginx sends /api/ to the services.
 ENV VITE_API_BASE_URL=""
-# The public Turnstile (captcha) site key. Pass it with --build-arg. It is not secret, but it differs per environment.
-ARG VITE_TURNSTILE_SITE_KEY=""
+# The public Turnstile (captcha) site key. It is not secret, but it differs per environment: pass the real one with
+# --build-arg for staging. The default is Cloudflare's official TEST site key, the partner of the test secret in
+# infrastructure/environments/local/env/user-service.env. With it the local stack works at once. A real secret
+# rejects the test key's tokens, so a staging image built without the real key fails safely (nobody can register).
+ARG VITE_TURNSTILE_SITE_KEY="1x00000000000000000000AA"
 ENV VITE_TURNSTILE_SITE_KEY=$VITE_TURNSTILE_SITE_KEY
 RUN npm run build
 
